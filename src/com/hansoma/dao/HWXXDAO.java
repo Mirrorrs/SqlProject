@@ -7,7 +7,7 @@ import com.hansoma.model.HWXX;
 
 public interface HWXXDAO {
 	
-	boolean hwxxDelete();
+	boolean hwxxDelete(int ID);
 	
 	List<HWXX> hwxxSelect();
 

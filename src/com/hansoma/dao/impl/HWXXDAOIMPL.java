@@ -19,19 +19,9 @@ public class HWXXDAOIMPL implements HWXXDAO{
 	public static void main(String[] args) throws ParseException {
 		HWXXDAOIMPL impl = new HWXXDAOIMPL();
 		List<HWXX> rs = impl.hwxxSelect();
-		System.out.println(rs.get(0).getInDate());
-		int id = 5;
-		String name = "M4A4|Neo-Noir";
-		int storage = 12;
-		int price = 600;
-		String owner = "ScreaM";
-		String indate = "2018-01-12";
-		//String outdate = "2018-01-23 22:45:56";
-		String outdate = null;
-		//impl.hwxxInsert(id, name, storage, price, owner, indate, outdate);
-		//impl.hwxxUpdateStorage(1, 500);
-		impl.hwxxUpdateIndate(1, indate);
-
+		System.out.println(rs.get(0).getName());
+		int ID = 100;
+		impl.hwxxDelete(ID);
 	}
 	
 	// 字符串转java.sql.date
@@ -125,9 +115,21 @@ public class HWXXDAOIMPL implements HWXXDAO{
 	}
 
 	@Override
-	public boolean hwxxDelete() {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean hwxxDelete(int ID) {
+		boolean flag = false;
+		try {
+			Connection con = DBUtil.con();
+			// 创建statement对象执行mysql命令
+			Statement statement = con.createStatement();
+			String Id = Integer.toString(ID);
+			String sql = "delete from HWXX where ID=" + Id;
+			System.out.println(sql);
+			statement.execute(sql);
+			flag = true;
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return flag;
 	}
 
 	@Override
